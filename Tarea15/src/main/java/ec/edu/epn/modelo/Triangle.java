@@ -58,4 +58,40 @@ public class Triangle {
     public double getSide3() {
         return side3;
     }
+    /**
+     * Gets perimeter.
+     *
+     * @return the perimeter
+     */
+    public double getPerimeter() {
+        return side1 + side2 + side3;
+    }
+
+    /**
+     * Gets type.
+     *
+     * @return the type
+     */
+    public String getType() {
+        boolean sides1And2Equal = side1 == side2;
+        boolean sides2And3Equal = side2 == side3;
+
+        if (sides1And2Equal && sides2And3Equal) {
+            return "Equilatero";
+        } else if (sides1And2Equal || sides2And3Equal || side1 == side3) {
+            return "Isosceles";
+        } else {
+            return "Escaleno";
+        }
+    }
+
+    /**
+     * Gets area.
+     *
+     * @return the area
+     */
+    public double getArea() {
+        final double s = getPerimeter() / 2;
+        return Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
+    }
 }
