@@ -86,4 +86,74 @@ public class TriangleTest {
         assertEquals(smallValue, triangle.getSide2());
         assertEquals(smallValue, triangle.getSide3());
     }
+
+    //////////////////TEST DE CONJETURA DE ERRORES/////////////////////
+
+    /**
+     * Test triangle with non numeric values.
+     */
+    @Test
+    void testTriangleWithNonNumericValues() {
+        assertThrows(IllegalArgumentException.class, () -> new Triangle(Double.NaN, 1.0, 1.0));
+        assertThrows(IllegalArgumentException.class, () -> new Triangle(Double.POSITIVE_INFINITY, 1.0, 1.0));
+    }
+
+    /**
+     * Test triangle with limited precision.
+     */
+    @Test
+    void testTriangleWithLimitedPrecision() {
+        assertDoesNotThrow(() -> new Triangle(1.0, 1.0, 1.0 + Double.MIN_VALUE));
+    }
+
+
+//////////////////TEST DE FUNCIONES/////////////////////
+    /**
+     * Test triangle with extreme values.
+     */
+    @Test
+    public void testTriangle() {
+        Triangle t = new Triangle(3, 4, 5);
+        assertEquals(3, t.getSide1());
+        assertEquals(4, t.getSide2());
+        assertEquals(5, t.getSide3());
+        assertEquals(12, t.getPerimeter());
+        assertEquals("Scalene", t.getType());
+
+    }
+
+    /**
+     * Test triangle equilateral.
+     */
+    @Test
+    public void testTriangleEquilateral() {
+        Triangle t = new Triangle(3, 3, 3);
+        assertEquals(3, t.getSide1());
+        assertEquals(3, t.getSide2());
+        assertEquals(3, t.getSide3());
+        assertEquals(9, t.getPerimeter());
+        assertEquals("Equilateral", t.getType());
+    }
+
+    /**
+     * Test triangle isosceles.
+     */
+    @Test
+    public void testTriangleIsosceles() {
+        Triangle t = new Triangle(3, 3, 4);
+        assertEquals(3, t.getSide1());
+        assertEquals(3, t.getSide2());
+        assertEquals(4, t.getSide3());
+        assertEquals(10, t.getPerimeter());
+        assertEquals("Isosceles", t.getType());
+    }
+
+    /**
+     * Test triangle invalid.
+     */
+    @Test
+    public void testTriangleInvalid() {
+        assertThrows(IllegalArgumentException.class, () -> new Triangle(0, 0, 0));
+        assertThrows(IllegalArgumentException.class, () -> new Triangle(1, 1, 2));
+    }
 }
